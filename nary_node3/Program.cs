@@ -19,7 +19,29 @@ dNaryNode.Children = new List<NaryNode<string>> { gNaryNode };
 cNaryNode.Children = new List<NaryNode<string>> { fNaryNode };
 fNaryNode.Children = new List<NaryNode<string>> { hNaryNode, iNaryNode };
 
-Console.WriteLine(rootNaryNode);
+// Find some values.
+FindValue(rootNaryNode, "Root");
+FindValue(rootNaryNode, "E");
+FindValue(rootNaryNode, "F");
+FindValue(rootNaryNode, "Q");
+
+// Find F in the C subtree.
+FindValue(cNaryNode, "F");
+
+void FindValue(NaryNode<string> root, string key)
+{
+    var found = root.FindNode(key);
+
+    if (found != null)
+    {
+        Console.WriteLine($"Found {found.Value}");
+    }
+    else
+    {
+        Console.WriteLine($"Value {key} not found");
+    }
+
+}
 
 
 

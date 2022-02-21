@@ -47,5 +47,20 @@ namespace binary_node3
             result += RightChild?.ToString(indent) ?? $"{indent}none\n";
             return result;
         }
+
+        public BinaryNode<T>? FindNode(T key)
+        {
+            if (key == null)
+            {
+                return null;
+            }
+
+            if (key.Equals(Value))
+            {
+                return this;
+            }
+
+            return LeftChild?.FindNode(key) ?? RightChild?.FindNode(key) ?? null;
+        }
     }
 }

@@ -34,5 +34,25 @@ namespace nary_node3
             return result;
         }
 
+        public NaryNode<T>? FindNode(T key)
+        {
+            if (key == null)
+            {
+                return null;
+            }
+
+            if (key.Equals(Value))
+            {
+                return this;
+            }
+
+            foreach (var child in Children)
+            {
+                var foundChild = child.FindNode(key);
+                if (foundChild != null) return foundChild;
+            }
+
+            return null;
+        }
     }
 }
