@@ -57,17 +57,55 @@ namespace nary_node4
 
         public IEnumerable<NaryNode<T>> TraversePreorder()
         {
-            return new List<NaryNode<T>>();
+            return TraversePreorder(this, new List<NaryNode<T>>());
         }
 
+        private IEnumerable<NaryNode<T>> TraversePreorder(NaryNode<T> root, List<NaryNode<T>> list)
+        {
+            list.Add(root);
+            foreach (var node in root.Children)
+            {
+                TraversePreorder(node, list);
+            }
+
+            return list;
+        }
 
         public IEnumerable<NaryNode<T>> TraversePostorder()
         {
-            return new List<NaryNode<T>>();
+            return TraversePostorder(this, new List<NaryNode<T>>());
         }
+
+        private IEnumerable<NaryNode<T>> TraversePostorder(NaryNode<T> root, List<NaryNode<T>> list)
+        {
+            foreach (var node in root.Children)
+            {
+                TraversePostorder(node, list);
+            }
+            list.Add(root);
+
+            return list;
+        }
+
+
         public IEnumerable<NaryNode<T>> TraverseBreadthFirst()
         {
-            return new List<NaryNode<T>>();
+            var result = new List<NaryNode<T>>();
+            var queue = new Queue<NaryNode<T>>();
+
+            queue.Enqueue(this);
+            while (queue.Any())
+            {
+                var node = queue.Dequeue();
+                result.Add(node);
+                foreach (var childNode in node.Children)
+                {
+                    queue.Enqueue(childNode);
+                }
+            }
+
+            return result;
+
         }
 
     }
